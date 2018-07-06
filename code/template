@@ -1,5 +1,6 @@
 namespace c160{
 using System;
+using System.Collections.Generic;
 public class Solution
 {
     public int Do(string s)
