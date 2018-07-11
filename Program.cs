@@ -8,8 +8,8 @@ namespace vscode
     {
         static void Main(string[] args)
         {
-            var so = new c204.Solution();
-			so.CountPrimes(5);
+            var so = new c207.Solution();
+			so.Do(8, new int[,]{{1,0},{2,6},{1,7},{6,4},{7,0},{0,5}});
         }
     }
 
