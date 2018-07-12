@@ -8,8 +8,14 @@ namespace vscode
     {
         static void Main(string[] args)
         {
-            var so = new c207.Solution();
-			so.Do(8, new int[,]{{1,0},{2,6},{1,7},{6,4},{7,0},{0,5}});
+            var so = new c211.WordDictionary();
+			so.AddWord("bad");
+			so.AddWord("dad");
+			so.AddWord("mad");
+			so.Search("pad");
+			so.Search("bad");
+			so.Search(".ad");
+			so.Search("b..");
         }
     }
 
