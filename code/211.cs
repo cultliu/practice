@@ -1,6 +1,7 @@
 namespace c211{
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class WordDictionary {
     private IList<int[]> dict = new List<int[]>();
@@ -13,11 +14,12 @@ public class WordDictionary {
     /** Adds a word into the data structure. */
     public void AddWord(string word) {
         var arr = word.ToCharArray();
-        for(int i=0; i<arr.Length; i++)
+        int i=0;
+        for(; i<arr.Length; i++)
         {
             if (dict.Count <= i) dict.Add(new int[26]);
 
-            dict[i][arr[i]-'a'] = (i==arr.Length-1? 2 : 1);
+            dict[i][arr[i]-'a'] = Math.Max(dict[i][arr[i]-'a'], (i==arr.Length-1? 2 : 1));
         }
     }
     
@@ -35,7 +37,18 @@ public class WordDictionary {
             if (dict[i][arr[i]-'a'] == 0) return false;
         }
 
-        return dict[i-1][arr[i-1]-'a'] == 2;
+        if (arr[i-1]=='.') 
+        {
+            if (dict[i-1].Any(o => o ==2))
+            {
+                return true;
+            }
+        }
+        else if (dict[i-1][arr[i-1]-'a'] == 2){
+            return true;
+        }
+
+        return false;
     }
 }
 

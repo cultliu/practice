@@ -9,13 +9,21 @@ namespace vscode
         static void Main(string[] args)
         {
             var so = new c211.WordDictionary();
-			so.AddWord("bad");
-			so.AddWord("dad");
-			so.AddWord("mad");
-			so.Search("pad");
-			so.Search("bad");
-			so.Search(".ad");
-			so.Search("b..");
+			so.AddWord("at");
+			so.AddWord("and");
+			so.AddWord("an");
+			so.AddWord("add");
+			var a = so.Search("a");
+			var b = so.Search(".at");
+			so.AddWord("bat");
+			so.Search(".at");
+
+			so.Search("an.");
+			so.Search("a.d.");
+			so.Search("a.");
+			so.Search("a.b");
+			so.Search(".");
+
         }
     }
 
