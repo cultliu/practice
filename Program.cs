@@ -31,7 +31,7 @@ namespace vscode
 
 public class Solution
 {
-public void ReorderList (ListNode head)
+public void ReorderList (ListNode head) 
 	{
 		if (head == null || head.next == null || head.next.next == null) return;
 		//find the middle
