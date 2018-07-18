@@ -5,15 +5,15 @@ using System.Linq;
 
 public class Solution
 {
-    public int Do(bool[,] grid)
+    public int Do(char[,] matrix)
     {
-        int n = grid.GetLength(0), m = grid.GetLength(1);
+        int n = matrix.GetLength(0), m = matrix.GetLength(1);
         int[,] results = new int[n,m];
         int result = 0;
 
         for (int j =0; j<m; j++)
         {
-            if(grid[0,j])
+            if(matrix[0,j]=='1')
             {
                 results[0,j] = 1;
                 result = Math.Max(result, 1);
@@ -22,7 +22,7 @@ public class Solution
 
         for(int i=1; i<n; i++)
         {
-            if (grid[i,0])
+            if (matrix[i,0]=='1')
             {
                 results[i,0] = 1;
 
@@ -31,7 +31,7 @@ public class Solution
 
             for (int j =1; j<m; j++)
             {
-                if(grid[i,j])
+                if(matrix[i,j]=='1')
                 {
                     int temp = Math.Min(results[i-1,j], results[i, j-1]);
                     temp = Math.Min(temp, results[i-1,j-1]);

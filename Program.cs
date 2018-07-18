@@ -8,21 +8,8 @@ namespace vscode
     {
         static void Main(string[] args)
         {
-            var so = new c211.WordDictionary();
-            so.AddWord("at");
-            so.AddWord("and");
-            so.AddWord("an");
-            so.AddWord("add");
-            var a = so.Search("a");
-            var b = so.Search(".at");
-            so.AddWord("bat");
-            so.Search(".at");
-
-            so.Search("an.");
-            so.Search("a.d.");
-            so.Search("a.");
-            so.Search("a.b");
-            so.Search(".");
+            var so = new c227.Solution();
+            so.Do("3+2*2");
 
         }
     }

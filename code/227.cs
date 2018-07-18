@@ -8,15 +8,13 @@ public class Solution
     public int Do(string s)
     {
         var stack = new Stack<int>();
-
+        int curNum = 0;
+        char lastOp = '\0';
         foreach(char ch in s.ToCharArray())
         {
-            int curNum = 0;
-            char lastOp = '\0';
-
             if (ch == '+'  || ch == '-' || ch=='*'|| ch=='/')
             {
-                if (lastOp =='+')
+                if (lastOp =='+' || lastOp == '\0')
                 stack.Push(curNum);
                 if(lastOp == '-')
                 stack.Push(-1*curNum);
@@ -33,6 +31,7 @@ public class Solution
                 curNum = curNum*10+ ch-'0';
             }
         }
+        stack.Push(curNum);
 
         //add all
         var result = 0;
