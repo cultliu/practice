@@ -1,4 +1,4 @@
-namespace c229{
+namespace c241{
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +6,31 @@ using System.Linq;
 
 public class Solution
 {
-    public int Do(string s)
+    List<int> nums = new List<int>();
+    List<char> ops = new List<char>();
+
+    public IList<int> Do(string input)
     {
-        
+        int curNum = 0;
+        foreach(char ch in input.ToCharArray())
+        {
+            if (char.IsDigit(ch))
+            {
+                curNum = curNum *10 + (ch - '0');
+            }
+            else 
+            {   
+                nums.Add(curNum);
+                ops.Add(ch);
+                curNum = 0;
+            }
+        }
+        nums.Add(curNum);   
+    }
+
+    public IList<int> Do(int start, int len)
+    {
+        if (len == 1) return nums[start];
     }
 }
 }
