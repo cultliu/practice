@@ -8,8 +8,8 @@ namespace vscode
     {
         static void Main(string[] args)
         {
-            var so = new c229.Solution();
-            so.Do(new int[]{3,2,3});
+            var so = new c241.Solution();
+            so.Do("2-1-1");
 
         }
     }
