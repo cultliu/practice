@@ -8,9 +8,9 @@ namespace vscode
     {
         static void Main(string[] args)
         {
-            var so = new c241.Solution();
-            so.Do("2-1-1");
-
+            var so = new c265.Solution();
+            var resut = so.MinCostII(new int[,] {{1,5,2},{2,6,4}});
+            int a = 1;
         }
     }
 
