@@ -6,42 +6,18 @@ using System.Linq;
 
 public class Solution {
     public int ClosestValue(TreeNode root, double target) {
-        if (target == root.val) return root.val;
-        else if (target < root.val)
+        
+        var cur = root;
+        int result = cur.val;
+        while(cur != null)
         {
-            if (root.left==null)
-            {
-                return root.val;
-            }
-            
-            int leftClose = ClosestValue(root.left, target);
-            if (target <= root.left.val)
-            {
-                return leftClose;
-            }
-            else
-            {
-                return Math.Abs(leftClose-target) > Math.Abs(root.val - target) ? root.val : leftClose; 
-            }
+            result = Math.Abs(target-cur.val) > Math.Abs(target-result)? result : cur.val;
+
+            if (target == cur.val) return cur.val;
+            cur = target > cur.val? cur.right:cur.left;
         }
-        else
-        {
-            if (root.right==null)
-            {
-                return root.val;
-            }
-            
-            int rightClose = ClosestValue(root.right, target);
-            if (target >= root.right.val)
-            {
-                return rightClose;
-            }
-            else
-            {
-                return Math.Abs(rightClose-target) > Math.Abs(root.val - target) ? root.val : rightClose; 
-            }
-        }
-    
+
+        return result;
     }
 }
 }
