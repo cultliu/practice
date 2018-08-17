@@ -8,8 +8,11 @@ namespace vscode
     {
         static void Main(string[] args)
         {
-            var so = new c265.Solution();
-            var resut = so.MinCostII(new int[,] {{1,5,2},{2,6,4}});
+            var so = new c269.Solution();
+
+            
+            //var resut = so.AlienOrder(new string[]{"za", "zb", "ca", "cb"});
+            var resut = so.AlienOrder(new string[]{"wrt","wrf","er","ett","rftt"});
             int a = 1;
         }
     }
