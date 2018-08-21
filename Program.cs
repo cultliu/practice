@@ -8,11 +8,9 @@ namespace vscode
     {
         static void Main(string[] args)
         {
-            var so = new c269.Solution();
+            var so = new c275.Solution();
 
-            
-            //var resut = so.AlienOrder(new string[]{"za", "zb", "ca", "cb"});
-            var resut = so.AlienOrder(new string[]{"wrt","wrf","er","ett","rftt"});
+            var resut = so.HIndex(new int[]{0,1,3,5,6});
             int a = 1;
         }
     }
