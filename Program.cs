@@ -8,9 +8,9 @@ namespace vscode
     {
         static void Main(string[] args)
         {
-            var so = new c275.Solution();
+            var so = new c279.Solution();
 
-            var resut = so.HIndex(new int[]{0,1,3,5,6});
+            var resut = so.NumSquares(12);
             int a = 1;
         }
     }
