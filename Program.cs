@@ -8,9 +8,9 @@ namespace vscode
     {
         static void Main(string[] args)
         {
-            var so = new c301.Solution();
+            var so = new c336.Solution();
 
-            var resut = so.RemoveInvalidParentheses("(((k()((");
+            var resut = so.Do(new string[]{"aa","a",""});
             int a = 1;
         }
     }
