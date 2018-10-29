@@ -1,76 +1,72 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace vscode
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            var so = new c301.Solution();
-
-            var resut = so.RemoveInvalidParentheses("(((k()((");
-            int a = 1;
-        }
+        var relations = new List<IList<int>>{new List<int>{1,4}, new List<int>{2}, new List<int>{3,5}, new List<int>{4}, new List<int>{2,5}, new List<int>() };
+        int a = FindShortest(relations);
     }
 
-    
+    static int GetNextNode(int[] dists)
+    {
+        int min = int.MaxValue;
+        int result = -1;
+        for(int i = 0; i < dists.Length; i++)
+        {
+            if (dists[i] >=0)
+            {
+                if (dists[i] <=min)
+                {
+                    min = dists[i];
+                    result = i;
+                }
+            }
+        }
+        return result;
+    }
 
-public class Solution
-{
-public void ReorderList (ListNode head) 
+    static int FindShortest(IList<IList<int>> relations)
     {
-        if (head == null || head.next == null || head.next.next == null) return;
-        //find the middle
-        var dummy = new ListNode(0);
-        dummy.next = head;
-        ListNode p1 = dummy, p2 = dummy;
-        while (p2!= null && p2.next != null)
+        int n = relations.Count;
+        var dist = new int[n];
+        var pre = new int[n];
+        dist[0] = 0;
+
+        for(int i = 1; i < n; i++)
         {
-            p1 = p1.next;
-            p2 = p2.next.next;
+            dist[i] = int.MaxValue;
         }
-        
-        var newHead = ListReverse(p1.next);
-        p1.next = null;
-        
-        ListMerge(head, newHead);
-        
+
+
+        for(int i = 0; i < n; i++)
+        {
+            int node = GetNextNode(dist);
+            if (node == n-1)
+            {
+                break;
+            }
+            if (dist[node] == int.MaxValue)
+            {
+                break;
+            }
+
+            foreach(int p in relations[node])
+            {
+                if (dist[p] >=0)
+                {
+                    int distance = (node-p) * (node - p);
+                    dist[p] = Math.Min(dist[p], dist[node] + distance);
+                    pre[p] = node;
+                }
+            }
+
+            dist[node] = -1;
+        }
+
+        return dist[n-1];
     }
-    
-    private ListNode ListReverse(ListNode head)
-    {
-        if (head.next == null)
-        {
-            return head;
-        }
-        
-        ListNode p1 = null, p2 = head, p3 = head.next;
-        while (p3 != null)
-        {
-            p2.next = p1;
-            p1 = p2;
-            p2 = p3;
-            p3 = p3.next;
-        }
-        p2.next = p1;
-        
-        return p2;
-    }
-    
-    private void ListMerge(ListNode l1, ListNode l2)
-    {
-        ListNode p1 = l1, p2 = l2;
-        while(p2 != null)
-        {
-            var t1 = p1.next;
-            p1.next = p2;
-            var t2 = p2.next;
-            p2.next = t1;
-            p1 = t1;
-            p2 = t2;
-        }
-    }
-}
 }
