@@ -6,14 +6,12 @@ using System.Collections.Generic;
 class Program
 {
     static void Main()
-    {
-        static void Main(string[] args)
-        {
-            var so = new c336.Solution();
+    {   
+        var so = new c751.Solution();
 
-            var resut = so.Do(new string[]{"aa","a",""});
-            int a = 1;
-        }
+        var resut = so.ipToCIDR(so.p1, so.p2);
+
+        int a = 1;
     }
 
     static int GetNextNode(int[] dists)
