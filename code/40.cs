@@ -6,6 +6,7 @@ using System.Linq;
 
 public class Solution {
     public IList<IList<int>> CombinationSum2(int[] candidates, int target) {
+        Array.Sort(candidates);
         return Helper(candidates, 0, target);
     }
     
@@ -15,6 +16,11 @@ public class Solution {
 
         if (candidates[start] > target)
             return result;
+
+        if (candidates[start] == target)
+        {
+            result.Add(new List<int>{candidates[start]});
+        }
         
         var resultA = Helper(candidates, start+1, target-candidates[start]);
         foreach(var resA in resultA)
@@ -23,8 +29,9 @@ public class Solution {
         }
         var resultB = Helper(candidates, start+1, target);
         
-        resultA.Add(resultB);
-        return resultA;
+        result.AddRange(resultA);
+        result.AddRange(resultB);
+        return result;
     }
 }
 }
