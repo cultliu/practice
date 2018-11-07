@@ -82,7 +82,7 @@ public class NewEnumerator
 
 public class Solution
 {
-    static void Main(string[] args)
+    static void Main1(string[] args)
     {
         var data = new List<List<int>>();
         data.Add(new List<int> {1,2,3,4,5});

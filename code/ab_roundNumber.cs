@@ -6,7 +6,7 @@ using System.Linq;
 
 public class Solution
 {
-    static void Main()
+    static void Main1()
     {
         var test = new double[] {1.2, 2.8, 5.5};
         var res = Round(test);

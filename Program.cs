@@ -7,9 +7,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        var so = new c212.Solution();
+        var so = new c773.Solution();
 
-        var resut = so.FindWords(so.testdata, so.testdata1);
+        var resut = so.SlidingPuzzle(new int[2,3]{{4,1,2},{5,0,3}});
         int a = 1;
     }
 
