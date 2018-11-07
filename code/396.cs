@@ -1,15 +1,15 @@
-namespace c336{
-using System;
-using System.Collections.Generic;
-using System.Linq;
+// namespace c336{
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
 
 
-public class Solution
-{
-    public int Do(string s)
-    {
+// public class Solution
+// {
+//     public int Do(string s)
+//     {
         
-    }
-}
-}
-}
+//     }
+// }
+// }
+// }

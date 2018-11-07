@@ -5,15 +5,12 @@ using System.Collections.Generic;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            var so = new c336.Solution();
+        var so = new c212.Solution();
 
-            var resut = so.Do(new string[]{"aa","a",""});
-            int a = 1;
-        }
+        var resut = so.FindWords(so.testdata, so.testdata1);
+        int a = 1;
     }
 
     static int GetNextNode(int[] dists)
