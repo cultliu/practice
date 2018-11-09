@@ -7,9 +7,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        var so = new c773.Solution();
+        var so = new c773.Solution1();
 
-        var resut = so.SlidingPuzzle(new int[2,3]{{4,1,2},{5,0,3}});
+        var resut = so.SlidingPuzzle(so.test);
         int a = 1;
     }
 
