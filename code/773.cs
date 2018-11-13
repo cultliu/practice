@@ -115,7 +115,6 @@ public class Solution1
 public class Solution {
     const int n = 2;
     const int m = 3;
-    const int mask = 1<<18-1;
     HashSet<int> hash = new HashSet<int>();
 
     public int[,] test = new int[,]{{4,1,2},{5,0,3}};
