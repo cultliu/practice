@@ -21,11 +21,6 @@ public class Solution1
     }
 
     public int SlidingPuzzle(string boardHash) {
-        if(boardHash == "012453")
-        {
-            int s = 1;
-        }
-
         int count = 1;
         var curSteps = GetNextBoards(boardHash);
 

@@ -5,7 +5,7 @@ using System.Linq;
 
 
 class HelloWorld {
-    static void Main() {
+    static void Main1() {
         System.Console.WriteLine(Collatz(3));
     }
     

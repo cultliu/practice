@@ -45,7 +45,6 @@ class Solution
     
     static string Guess()
     {
-        int index = 0;
         string guess = "1111";
         int res = ServerCheck(guess);
         

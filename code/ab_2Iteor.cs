@@ -4,81 +4,97 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-public class NewEnumerator
+public class My2DList
 {
-    private List<List<int>> data;
-    private int col = 0, row = 0;
-
-
-    public NewEnumerator(List<List<int>> data)
+    public class MyEnumerator
     {
-        this.data = data;
-    }
+        private List<List<int>> data;
+        private int col = 0, row = 0;
 
-    public int Next()
-    {
-        if (col < 0)
+        public MyEnumerator(List<List<int>> data)
         {
-            throw new Exception();
+            this.data = data;
         }
 
-        var result = data[col][row];
-        if (row<data[col].Count-1)
+        public int Next()
         {
-            row++;
-        }
-        else
-        {
-            int i = col+1;
-            for(; i< data.Count; i++)
+            if (col < 0)
             {
-                if (data[i].Count > 0)
+                throw new Exception();
+            }
+
+            var result = data[col][row];
+            if (row<data[col].Count-1)
+            {
+                row++;
+            }
+            else
+            {
+                int i = col+1;
+                for(; i< data.Count; i++)
                 {
-                    col = i;
-                    row = 0;
-                    break;
+                    if (data[i].Count > 0)
+                    {
+                        col = i;
+                        row = 0;
+                        break;
+                    }
+                }
+                if (i == data.Count)
+                {
+                    col = -1;
                 }
             }
-            if (i == data.Count)
+            return result;
+        }
+
+        public bool HasNext()
+        {
+            if (col<0) throw new Exception();
+
+            if (row<data[col].Count-1)
             {
-                col = -1;
+                return true;
             }
-        }
-        return result;
-    }
-
-    public bool HasNext()
-    {
-        if (col<0) throw new Exception();
-
-        if (row<data[col].Count-1)
-        {
-            return true;
-        }
-        else 
-        {
-            int i = col+1;
-            for(; i< data.Count; i++)
+            else 
             {
-                if (data[i].Count > 0)
+                int i = col+1;
+                for(; i< data.Count; i++)
                 {
-                    return true;
+                    if (data[i].Count > 0)
+                    {
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
+        }
+
+        public void Remove()
+        {
+            data[col].RemoveAt(row);
+            if (data[col].Count == 0)
+            {
+                data.RemoveAt(col);
+            }
+            col = -1;
         }
     }
 
-    public void Remove()
+    private List<List<int>> _data;
+
+    public My2DList(List<List<int>> data)
     {
-        data[col].RemoveAt(row);
-        if (data[col].Count == 0)
-        {
-            data.RemoveAt(col);
-        }
-        col = -1;
+        _data = data;
+    }
+
+    public MyEnumerator GetEnumerator()
+    {
+        return new MyEnumerator(_data);
     }
 }
+
+
 
 public class Solution
 {
@@ -90,7 +106,9 @@ public class Solution
         data.Add(new List<int> {});
         data.Add(new List<int> {111});
         data.Add(new List<int> {21,22,23,24,25});
-        var it = new NewEnumerator(data);
+
+        var list2d = new My2DList(data);
+        var it = list2d.GetEnumerator();
         
         while(it.HasNext())
         {
@@ -101,6 +119,15 @@ public class Solution
                 it.Remove();
                 break;
             }
+        }
+
+        Console.WriteLine("...");
+        var it2 = list2d.GetEnumerator();
+        
+        while(it2.HasNext())
+        {
+            var val = it2.Next();
+            Console.WriteLine(val);
         }
     }
 }
