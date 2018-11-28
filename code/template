@@ -6,6 +6,12 @@ using System.Linq;
 
 public class Solution
 {
+    static void Main()
+    {
+        var so = new Solution();
+        //so.Do()
+    }
+
     public int Do(string s)
     {
         
