@@ -6,7 +6,7 @@ using System.Linq;
 
 public class Solution
 {
-    static void Main()
+    static void Main1()
     {
         Console.WriteLine(FindMedian(new int[]{1,2,3}));
     }
