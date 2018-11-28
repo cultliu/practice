@@ -6,7 +6,7 @@ using System.Linq;
 
 public class Solution
 {
-    static public void Main()
+    static public void Main1()
     {
         var input = new string[] {@"John,Smith,john.smith@gmail.com,Los Angeles,1", 
         "Jane,Roberts,janer@msn.com,\"San Francisco, CA\",0",
