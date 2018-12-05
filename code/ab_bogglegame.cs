@@ -1,75 +1,53 @@
-// namespace ab{
-// using System;
-// using System.Text;
-// using System.Collections.Generic;
-// using System.Linq;
+namespace ab_boggle{
+using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
 
-// class Untitled {
-//     // 从每个点开始，找从这个点出发的所有单词组合
-//     public void getAllWords(char[,] board, String[] words) {
-//         // 构建字典树加速查找
-//         Trie trie = new Trie();
-//         foreach(String word in words) {
-//             trie.insert(word);
-//         }
+class Untitled {
+    // 从每个点开始，找从这个点出发的所有单词组合
+    public List<String> getAllWords(char[,] board, String[] words) {
+        // 构建字典树加速查找
+        Trie trie = new Trie();
+        foreach(String word in words) {
+            trie.insert(word);
+        }
 
-//         int m = board.length;
-//         int n = board[0].length;
-//         List<String> result = new ArrayList<>();
-//         // 每个点作为起点，可能会有不一样的结果
-//         for (int i = 0; i < m; i++) {
-//             for (int j = 0; j < n; j++) {
-//                 boolean[][] visited = new boolean[m][n];
-//                 List<String> path = new ArrayList<>();
-//                 findWords(result, board, visited, path, i, j, trie.root);
-//             }
-//         }
+        int m = board.GetLength(0);
+        int n = board.GetLength(1);
+        List<String> result = new List<String>();
+        // 每个点作为起点，可能会有不一样的结果
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                var res = findAllWords(board, i, j, trie.root);
+                if (res.Count > result.Count)
+                {
+                    result = res;
+                }
+            }
+        }
 
-//         System.out.println(result);
-//     }
+        return result;
+    }
 
-//     // 从i,j开始递归找到所有单词组合
-//     public void findWords(List<String> result, char[][] board, boolean[][] visited, List<String> words, int x, int y, TrieNode root) {
+    // find all words chain start from board[x,y]
+     public List<String> findAllWords(char[,] board, int x, int y, TrieNode root)
+     {
+         // 1. find all words start with board[x,y]
+        List<List<int[]>> stringPaths = FindWordsStartAt(board, x, y, root);
+        
+        foreach(var stringPath in stringPaths)
+        {
+            char[,] newBoard = board.Clone() as char[,];
+            foreach(int[] pos in stringPath)
+            {
+                newBoard[pos[0],pos[1]] = '*';
+            }
 
-//         int m = board.length;
-//         int n = board[0].length;
-//         for (int i = x; i < m; i++) {
-//             for (int j = y; j < n; j++) {
-//                 List<List<Integer>> nextWordIndexes = new ArrayList<>();
-//                 List<Integer> path = new ArrayList<>();
-//                 // 获得从当前点开始的所有可能单词的indexes
-//                 getNextWords(nextWordIndexes, board, visited, path, i, j, root);
-//                 for (List<Integer> indexes : nextWordIndexes) {
-//                     // 设置visited为当前使用单词
-//                     String word = "";
-//                     for (int index : indexes) {
-//                         int row = index / n;
-//                         int col = index % n;
-//                         visited[row][col] = true;
-//                         word += board[row][col];
-//                     }
+            
+        }
+     }
 
-//                     words.add(word);
-//                     // 只要更新了words，就保存一次words
-//                     if (words.size() > result.size()) {
-//                         result.clear();
-//                         result.addAll(words);
-//                     }
-//                     findWords(result, board, visited, words, i, j, root);
-
-//                     // 恢复visited
-//                     for (int index : indexes) {
-//                         int row = index / n;
-//                         int col = index % n;
-//                         visited[row][col] = false;
-//                     }
-//                     words.remove(words.size() - 1);
-//                 }
-//             }
-//             // 只有第x行是从y开始，后面都从0开始
-//             y = 0;
-//         }
-//     }
 
 //     private void getNextWords(List<List<int>> words, char[,] board, bool[,] visited, List<int> path, int i, int j, TrieNode root) {
 //         if(i < 0 | i >= board.GetLength(0) || j < 0 || j >= board.GetLength(1)
@@ -95,55 +73,54 @@
 //         visited[i,j] = false;
 //     }
 
-//     class Trie {
-//         TrieNode root;
+    public class Trie {
+        public TrieNode root;
 
-//         Trie() {
-//             root = new TrieNode('0');
-//         }
+        public Trie() {
+            root = new TrieNode('0');
+        }
 
-//         public void insert(String word) {
-//             if(word == null || word.Length == 0) {
-//                 return;
-//             }
-//             TrieNode node = root;
-//             for(int i = 0; i < word.Length; i++) {
-//                 char ch = word[i];
-//                 if(node.children[ch - 'a'] == null) {
-//                     node.children[ch - 'a'] = new TrieNode(ch);
-//                 }
-//                 node = node.children[ch - 'a'];
-//             }
-//             node.isWord = true;
-//         }
-//     }
+        public void insert(String word) {
+            if(word == null || word.Length == 0) {
+                return;
+            }
+            TrieNode node = root;
+            for(int i = 0; i < word.Length; i++) {
+                char ch = word[i];
+                if(node.children[ch - 'a'] == null) {
+                    node.children[ch - 'a'] = new TrieNode(ch);
+                }
+                node = node.children[ch - 'a'];
+            }
+            node.isWord = true;
+        }
+    }
 
-//     class TrieNode {
-//         public char value;
-//         public bool isWord;
-//         public TrieNode[] children;
+    public class TrieNode {
+        public char value;
+        public bool isWord;
+        public TrieNode[] children;
 
-//         public TrieNode(char v) {
-//             value = v;
-//             isWord = false;
-//             children = new TrieNode[26];
-//         }
-//     }
+        public TrieNode(char v) {
+            value = v;
+            isWord = false;
+            children = new TrieNode[26];
+        }
+    }
 
-//     public static void main(String[] args) {
-//         char[,] board = new char[,]{
-//             {'a', 'b', 'c'},
-//             {'d', 'e', 'f'},
-//             {'g', 'h', 'i'}
-//         };
-//         String[] words = new String[] {
-//             "abc", "cfi", "beh", "defi", "gh"
-//         };
+    public static void main(String[] args) {
+        char[,] board = new char[,]{
+            {'a', 'b', 'c'},
+            {'d', 'e', 'f'},
+            {'g', 'h', 'i'}
+        };
+        String[] words = new String[] {
+            "abc", "cfi", "beh", "defi", "gh", "fed"
+        };
 
-//         Untitled s = new Untitled();
-//         s.getAllWords(board, words);
-//     }
-// }
+        Untitled s = new Untitled();
+        s.getAllWords(board, words);
+    }
+}
+}
 
-
-// }
